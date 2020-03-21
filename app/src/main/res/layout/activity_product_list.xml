@@ -13,7 +13,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/product_list"
             android:layout_width="0dp"
-            app:mutableVisibility="@{viewModel.getShowList()"
+            app:mutableVisibility="@{viewModel.getShowList()}"
             app:adapter="@{viewModel.getProductListAdapter()}"
             android:layout_height="0dp"
             app:layout_constraintTop_toTopOf="parent"

@@ -24,17 +24,18 @@ interface ViewModelInjector {
      * @param itemAdapterViewModel ItemAdapterViewModel in which to inject the dependencies
      */
     fun inject(itemAdapterViewModel: ItemAdapterViewModel)
-    /**
-     * Injects required dependencies into the specified ProductAdapterViewModel.
-     * @param productAdapterViewModel ProductAdapterViewModel in which to inject the dependencies
-     */
-    fun inject(productAdapterViewModel: ProductAdapterViewModel)
 
     /**
      * Injects required dependencies into the specified ProductViewListModel.
      * @param productViewListModel ProductViewListModel in which to inject the dependencies
      */
     fun inject(productViewListModel: ProductViewListModel)
+
+    /**
+     * Injects required dependencies into the specified ProductAdapterViewModel.
+     * @param productAdapterViewModel ProductAdapterViewModel in which to inject the dependencies
+     */
+    fun inject(productAdapterViewModel: ProductAdapterViewModel)
 
     @Component.Builder
     interface Builder {

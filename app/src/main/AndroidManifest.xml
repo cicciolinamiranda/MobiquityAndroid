@@ -13,8 +13,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.product.ProductListActivity"
-            android:parentActivityName=".ui.item.ItemListActivity">
-        </activity>
+            android:parentActivityName=".ui.item.ItemListActivity"/>
         <activity android:name=".ui.item.ItemListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

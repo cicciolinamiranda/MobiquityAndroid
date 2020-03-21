@@ -45,17 +45,6 @@ class ProductViewListModel(private val itemDao: ItemDao): BaseViewModel() {
                     onRetrieveItemError()
                 }
             )
-//        subscription = itemDao.getById(itemId)
-//                    .subscribeOn(Schedulers.io())
-//                    .observeOn(AndroidSchedulers.mainThread())
-//                    .subscribe(
-//                        {
-//                                result -> onRetrieveItemSuccess(result as Item)
-//                        },
-//                        {
-//                            onRetrieveItemError()
-//                        }
-//                    )
 
     }
 

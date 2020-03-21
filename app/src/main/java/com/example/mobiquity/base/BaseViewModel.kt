@@ -26,8 +26,8 @@ abstract class BaseViewModel: ViewModel(){
         when (this) {
             is ItemViewListModel -> injector.inject(this)
             is ItemAdapterViewModel -> injector.inject(this)
-            is ProductAdapterViewModel -> injector.inject(this)
             is ProductViewListModel -> injector.inject(this)
+            is ProductAdapterViewModel -> injector.inject(this)
         }
     }
 }

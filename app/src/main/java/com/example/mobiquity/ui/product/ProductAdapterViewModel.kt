@@ -9,8 +9,8 @@ class ProductAdapterViewModel: BaseViewModel() {
     private val productName = MutableLiveData<String>()
     private val productDescription = MutableLiveData<String>()
     private val productImageUrl = MutableLiveData<String>()
-    private val productAmount = MutableLiveData<String>();
-    private val productCurrency = MutableLiveData<String>();
+    private val productAmount = MutableLiveData<String>()
+    private val productCurrency = MutableLiveData<String>()
 
     fun bind(product: Product){
         productName.value = product.name
