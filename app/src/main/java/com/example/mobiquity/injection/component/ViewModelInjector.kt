@@ -1,12 +1,10 @@
 package com.example.mobiquity.injection.component
 
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.room.Room
 import com.example.mobiquity.injection.module.NetworkModule
-import com.example.mobiquity.repository.database.AppDatabase
+import com.example.mobiquity.ui.item.ItemAdapterViewModel
 import com.example.mobiquity.ui.item.ItemViewListModel
+import com.example.mobiquity.ui.product.ProductAdapterViewModel
+import com.example.mobiquity.ui.product.ProductViewListModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -22,10 +20,21 @@ interface ViewModelInjector {
      */
     fun inject(itemViewListModel: ItemViewListModel)
     /**
-     * Injects required dependencies into the specified ArticleViewModel.
-     * @param articleViewModel ArticleViewModel in which to inject the dependencies
+     * Injects required dependencies into the specified ItemAdapterViewModel.
+     * @param itemAdapterViewModel ItemAdapterViewModel in which to inject the dependencies
      */
-//    fun inject(articleViewModel: ArticleViewModel)
+    fun inject(itemAdapterViewModel: ItemAdapterViewModel)
+    /**
+     * Injects required dependencies into the specified ProductAdapterViewModel.
+     * @param productAdapterViewModel ProductAdapterViewModel in which to inject the dependencies
+     */
+    fun inject(productAdapterViewModel: ProductAdapterViewModel)
+
+    /**
+     * Injects required dependencies into the specified ProductViewListModel.
+     * @param productViewListModel ProductViewListModel in which to inject the dependencies
+     */
+    fun inject(productViewListModel: ProductViewListModel)
 
     @Component.Builder
     interface Builder {

@@ -3,26 +3,19 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.mobiquity.ui.item.ItemViewListModel" />
+            type="com.example.mobiquity.ui.product.ProductViewListModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:mutableVisibility="@{viewModel.getLoadingVisibility()}"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/item_list"
+            android:id="@+id/product_list"
             android:layout_width="0dp"
+            app:mutableVisibility="@{viewModel.getShowList()"
+            app:adapter="@{viewModel.getProductListAdapter()}"
             android:layout_height="0dp"
-            app:adapter="@{viewModel.getItemListAdapter()}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

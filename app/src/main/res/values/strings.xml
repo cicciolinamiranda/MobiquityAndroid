@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">MobiquityAndroid</string>
+    <string name="app_name">Mobiquity</string>
     <string name="post_error">An error occurred while loading the data</string>
     <string name="retry">Retry</string>
+    <string name="format_id_text">ID: %1$s</string>
+    <string name="format_desc_text">Description: %1$s</string>
+
 </resources>

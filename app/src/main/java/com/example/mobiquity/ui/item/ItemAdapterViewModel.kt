@@ -1,22 +1,25 @@
 package com.example.mobiquity.ui.item
 
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.example.mobiquity.base.BaseViewModel
 import com.example.mobiquity.repository.model.Item
-import com.example.mobiquity.repository.model.Product
-import java.util.*
+import com.example.mobiquity.ui.product.ProductListAdapter
 
-class ItemAdapterViewModel: BaseViewModel() {
+open class ItemAdapterViewModel: BaseViewModel() {
     private val itemId = MutableLiveData<String>()
     private val itemName = MutableLiveData<String>()
     private val description = MutableLiveData<String>()
-    private val products = MutableLiveData<List<Product>>();
+//    val productListAdapter= ProductListAdapter()
+    var item: Item? = null
+    private lateinit var listener :ItemAdapterViewModelListener
 
     fun bind(item: Item){
+        this.item = item
         itemId.value = item.id.toString()
         itemName.value = item.name
         description.value = item.description
-        products.value = item.products
+//        productListAdapter.updateItemList(item.products)
     }
 
     fun getItemId():MutableLiveData<String>{
@@ -31,8 +34,15 @@ class ItemAdapterViewModel: BaseViewModel() {
         return description
     }
 
-    fun getItemProducts():MutableLiveData<List<Product>>{
-        return products
+    fun addListener(listener :ItemAdapterViewModelListener) {
+        this.listener = listener
     }
 
+    fun onItemClick(item: Item) {
+        this.listener?.onItemClick(item)
+    }
+
+    interface ItemAdapterViewModelListener {
+        fun onItemClick(item: Item)
+    }
 }
