@@ -15,9 +15,6 @@ interface ItemDao {
     @Query("SELECT * FROM Item WHERE id=:id")
     fun getById(id: Long): Item
 
-    @get:Query("SELECT * FROM Item WHERE id=36802")
-    val mockProduct: Item
-
     @Insert
     fun insert(vararg item: Item)
 
