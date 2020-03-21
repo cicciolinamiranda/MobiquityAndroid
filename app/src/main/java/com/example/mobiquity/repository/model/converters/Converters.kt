@@ -11,14 +11,14 @@ class Converters {
     companion object {
         @TypeConverter
         @JvmStatic
-        fun fromProducts(list: List<Product>): String {
+        fun fromProductStr(list: List<Product>): String {
             val gson = Gson()
             return gson.toJson(list)
         }
 
         @TypeConverter
         @JvmStatic
-        fun toProductsString(productsStr: String): List<Product> {
+        fun toProduct(productsStr: String): List<Product> {
             val listType = object : TypeToken<List<Product>>() {}.type
             return Gson().fromJson(productsStr, listType)
         }

@@ -6,7 +6,10 @@ import com.example.mobiquity.R
 import com.example.mobiquity.base.BaseViewModel
 import com.example.mobiquity.network.ItemApi
 import com.example.mobiquity.repository.dao.ItemDao
+import com.example.mobiquity.repository.dto.ProductDTO
 import com.example.mobiquity.repository.model.Item
+import com.example.mobiquity.repository.model.Product
+import com.example.mobiquity.repository.model.converters.Converters
 import com.example.mobiquity.ui.item.ItemListAdapter
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -29,17 +32,17 @@ class ProductViewListModel(private val itemDao: ItemDao): BaseViewModel() {
 
     fun loadItems(itemId: Long){
         subscription = Observable.fromCallable {
-            itemDao.getById(itemId)
+            itemDao.getProductsOnlyByItemId(itemId)
         }
             .concatMap {
-                    item ->
-                    Observable.just(item)
+                    itemProducts ->
+                    Observable.just(itemProducts)
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-                        result -> onRetrieveItemSuccess(result as Item)
+                        result -> onRetrieveItemSuccess(result as ProductDTO)
                 },
                 {
                     onRetrieveItemError()
@@ -48,10 +51,10 @@ class ProductViewListModel(private val itemDao: ItemDao): BaseViewModel() {
 
     }
 
-    private fun onRetrieveItemSuccess(item: Item) {
+    private fun onRetrieveItemSuccess(itemProducts: ProductDTO) {
         showList.value = View.VISIBLE
-        productListAdapter.updateItemList(item.products)
-        itemName.value = item.name
+        productListAdapter.updateItemList(Converters.toProduct(itemProducts.products))
+        itemName.value = itemProducts.itemName
     }
 
     private fun onRetrieveItemError(){
