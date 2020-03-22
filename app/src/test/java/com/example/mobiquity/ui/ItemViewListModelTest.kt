@@ -35,8 +35,8 @@ class ItemViewListModelTest {
     @get:Rule @JvmField
     val mockitoRule = MockitoJUnit.rule()!!
 
-    @get:Rule @JvmField
-    val testSchedulerRule = RxImmediateSchedulerRule()
+//    @get:Rule @JvmField
+//    val testSchedulerRule = RxImmediateSchedulerRule()
 
     @Mock
     lateinit var itemApi: ItemApi
@@ -94,8 +94,24 @@ class ItemViewListModelTest {
         itemViewListModel.loadItems()
 
         Assert.assertNotEquals(0,itemViewListModel.itemListAdapter.itemCount)
+    }
 
+    @Test
+    fun getItemsFromCacheFail() {
+        Mockito.`when`(itemDao.all).thenReturn(ArrayList())
+        itemViewListModel.loadItems()
 
+        Assert.assertEquals(0,itemViewListModel.itemListAdapter.itemCount)
+
+    }
+
+    @Test
+    fun getItemsFromApiFail() {
+        Mockito.`when`(itemDao.all).thenReturn(ArrayList())
+        Mockito.`when`(itemApi.getItems()).thenReturn(null)
+        itemViewListModel.loadItems()
+
+        Assert.assertEquals(0,itemViewListModel.itemListAdapter.itemCount)
     }
 }
 

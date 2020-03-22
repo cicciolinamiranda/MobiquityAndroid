@@ -39,9 +39,9 @@ class ProductViewListModelTest {
     @JvmField
     val mockitoRule = MockitoJUnit.rule()!!
 
-    @get:Rule
-    @JvmField
-    val testSchedulerRule = RxImmediateSchedulerRule()
+//    @get:Rule
+//    @JvmField
+//    val testSchedulerRule = RxImmediateSchedulerRule()
 
     @Mock
     lateinit var itemDao: ItemDao
@@ -75,6 +75,13 @@ class ProductViewListModelTest {
         productViewListModel.loadItems(item.id)
 
         Assert.assertNotEquals(null,productViewListModel.itemResp)
+    }
 
+    @Test
+    fun getProductsFail() {
+        Mockito.`when`(itemDao.getProductsOnlyByItemId(1)).thenReturn(null)
+        productViewListModel.loadItems(1)
+
+        Assert.assertNotEquals(null,productViewListModel.itemResp)
     }
 }
