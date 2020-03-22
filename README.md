@@ -6,7 +6,7 @@
 * Load data from server Using Retrofit2.
 * Use Livedata with Room.
 
-<img src="https://github.com/cicciolinamiranda/MobiquityAndroid/blob/master/static/mobiquity.gif" height="48" width="24">
+<img src="https://github.com/cicciolinamiranda/MobiquityAndroid/blob/master/static/mobiquity.gif" height="250px" width="250px">
 ***
 ## Technology Stack
 * Kotlin
@@ -24,6 +24,7 @@ Unit Test
 * src/test/java
 
 Proof of Test Coverage
+
 ![Sample test coverage](https://github.com/cicciolinamiranda/MobiquityAndroid/blob/master/static/test_coverage_sample.png)
 
 Libraries
