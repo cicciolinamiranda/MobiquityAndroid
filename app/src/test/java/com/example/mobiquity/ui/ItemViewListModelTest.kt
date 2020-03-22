@@ -66,10 +66,8 @@ class ItemViewListModelTest {
 
         testItems = Observable.just(items)
         Mockito.`when`(itemDao.all).thenReturn(items)
-//        Mockito.`when`(itemApi.getItems()).thenReturn(testItems)
         itemViewListModel.loadItems()
 
-        Assert.assertNotEquals(null,itemViewListModel.itemListAdapter)
         Assert.assertNotEquals(0,itemViewListModel.itemListAdapter.itemCount)
 
     }
@@ -88,8 +86,8 @@ class ItemViewListModelTest {
         Mockito.`when`(itemApi.getItems()).thenReturn(testItems)
         itemViewListModel.loadItems()
 
-        Assert.assertNotEquals(null,itemViewListModel.itemListAdapter)
         Assert.assertNotEquals(0,itemViewListModel.itemListAdapter.itemCount)
+
 
     }
 }

@@ -67,8 +67,7 @@ class ProductViewListModelTest {
         Mockito.`when`(itemDao.getProductsOnlyByItemId(item.id)).thenReturn(productDTO)
         productViewListModel.loadItems(item.id)
 
-        Assert.assertNotEquals(null,productViewListModel.productListAdapter)
-        Assert.assertNotEquals(0,productViewListModel.productListAdapter.itemCount)
+        Assert.assertNotEquals(null,productViewListModel.itemResp)
 
     }
 }

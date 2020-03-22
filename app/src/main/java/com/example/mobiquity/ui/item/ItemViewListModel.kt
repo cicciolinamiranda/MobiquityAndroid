@@ -46,13 +46,13 @@ class ItemViewListModel(): BaseViewModel() {
         }
             .concatMap {
                     itemList ->
+                itemCount.value = itemList.size
                 if(itemList.isEmpty())
                     itemApi.getItems().concatMap {
                             apiItemResponse -> itemDao.insertAll(apiItemResponse)
                         Observable.just(apiItemResponse)
                     }
                 else
-                    itemCount.value = itemList.size
                     Observable.just(itemList)
             }
             .subscribeOn(Schedulers.io())
