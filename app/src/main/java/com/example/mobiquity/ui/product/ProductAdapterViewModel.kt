@@ -1,5 +1,6 @@
 package com.example.mobiquity.ui.product
 
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.example.mobiquity.base.BaseViewModel
 import com.example.mobiquity.repository.model.Product
@@ -11,13 +12,15 @@ class ProductAdapterViewModel: BaseViewModel() {
     private val productImageUrl = MutableLiveData<String>()
     private val productAmount = MutableLiveData<String>()
     private val productCurrency = MutableLiveData<String>()
+    private val displayProductDesc = MutableLiveData<Int>()
 
     fun bind(product: Product){
         productName.value = product.name
         productDescription.value = product.description
         productAmount.value = product.salePrice.amount.toString() ;
-        productImageUrl.value = BASE_URL+product.url;
+        productImageUrl.value = product.url;
         productCurrency.value = product.salePrice.currency;
+        displayProductDesc.value = if (product.description.isEmpty()) View.GONE else View.VISIBLE
     }
 
     fun getProductName():MutableLiveData<String>{
@@ -38,6 +41,10 @@ class ProductAdapterViewModel: BaseViewModel() {
 
     fun getProductCurrency():MutableLiveData<String>{
         return productCurrency
+    }
+
+    fun showProductDesc():MutableLiveData<Int>{
+        return displayProductDesc
     }
 
 }
