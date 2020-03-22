@@ -14,7 +14,6 @@
 * Android
 
 DB
-* Firebase LiveData
 * Offline Storage Using Room
 
 
