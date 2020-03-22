@@ -11,6 +11,8 @@ import com.example.mobiquity.repository.database.AppDatabase
 import com.example.mobiquity.repository.model.Item
 import com.example.mobiquity.repository.model.Product
 import com.example.mobiquity.repository.model.SalePrice
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
@@ -55,6 +57,9 @@ class ItemDaoTest {
         val item = Item(1, "Item Name", "Item Description", products)
         val insertedIds = itemDao.insertAll(arrayListOf(item))
         Assert.assertNotEquals(null, insertedIds)
+        val itemResult = itemDao.getById(item.id)
+        Assert.assertEquals(item, itemResult)
+
     }
 
     @Test
@@ -67,4 +72,20 @@ class ItemDaoTest {
 
         Assert.assertEquals(1, returnItems.size)
     }
+
+    @Test
+    fun getProductsFromAnItem() {
+        val product = Product(1,1,"Product Name","/Bread.jpg", "Product Description", SalePrice(10.0, "EURO"))
+        val product2 = Product(2,1,"Product Name","/Bread.jpg", "Product Description", SalePrice(10.0, "EURO"))
+        val products = arrayListOf(product, product2)
+        val item = Item(1, "Item Name", "Item Description", products)
+        itemDao.insertAll(arrayListOf(item))
+        val returnItems = itemDao.getProductsOnlyByItemId(1);
+        val listType = object : TypeToken<List<Product>>() {}.type
+        val productResult: List<Product>? = try { Gson().fromJson(returnItems.products, listType) } catch (e: NumberFormatException) { null }
+        Assert.assertNotNull( productResult)
+        Assert.assertEquals(2, productResult!!.size)
+
+    }
+
 }

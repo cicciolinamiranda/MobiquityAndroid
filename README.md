@@ -19,8 +19,15 @@ DB
 Architectural Pattern
 * MVVM
 
+Unit Test
+* src/test/java
+
+Proof of Test Coverage
+
 Libraries
 * RxJava
 * Dagger2
 * Firestore
 * Room
+* Mockito
+* AndroidJUnit4
