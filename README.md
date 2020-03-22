@@ -6,7 +6,7 @@
 * Load data from server Using Retrofit2.
 * Use Livedata with Room.
 
-![Cicci Mobiquity Assignment](https://github.com/cicciolinamiranda/MobiquityAndroid/blob/master/static/mobiquity.gif =250x250)
+![Cicci Mobiquity Assignment](https://github.com/cicciolinamiranda/MobiquityAndroid/blob/master/static/mobiquity.gif = 250x250)
 
 ***
 ## Technology Stack
@@ -26,6 +26,7 @@ Unit Test
 
 Proof of Test Coverage
 ![Sample test coverage](https://github.com/cicciolinamiranda/MobiquityAndroid/blob/master/static/test_coverage_sample.png)
+
 Libraries
 * RxJava
 * Dagger2
