@@ -24,7 +24,7 @@ class ItemListActivity : AppCompatActivity(), ItemAdapterViewModel.ItemAdapterVi
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_item_list)
         binding.itemList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        viewModel = ViewModelProviders.of(this, ViewListModelFactory(this, false)).get(ItemViewListModel::class.java)
+        viewModel = ViewModelProviders.of(this, ViewListModelFactory(this)).get(ItemViewListModel::class.java)
         viewModel.addListener(this)
         viewModel.errorMessage.observe(this, Observer {
                 errorMessage -> if(errorMessage != null) showError(errorMessage) else hideError()

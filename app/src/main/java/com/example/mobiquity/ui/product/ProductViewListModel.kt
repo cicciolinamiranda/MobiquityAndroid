@@ -30,7 +30,6 @@ class ProductViewListModel(): BaseViewModel() {
     private lateinit var subscription: Disposable
     val showList: MutableLiveData<Int> = MutableLiveData()
     val itemName: MutableLiveData<String> = MutableLiveData()
-    val itemResp: MutableLiveData<ProductDTO> = MutableLiveData()
 
     override fun onCleared() {
         super.onCleared()
@@ -43,7 +42,6 @@ class ProductViewListModel(): BaseViewModel() {
         }
             .concatMap {
                     itemProducts ->
-                itemResp.value = itemProducts
                 Observable.just(itemProducts)
             }
             .subscribeOn(Schedulers.io())
