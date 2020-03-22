@@ -30,6 +30,8 @@ class ItemViewListModel(): BaseViewModel() {
 
     val errorClickListener = View.OnClickListener { loadItems() }
 
+    val itemCount: MutableLiveData<Int> = MutableLiveData()
+
     private lateinit var subscription: Disposable
 
     override fun onCleared() {
@@ -50,6 +52,7 @@ class ItemViewListModel(): BaseViewModel() {
                         Observable.just(apiItemResponse)
                     }
                 else
+                    itemCount.value = itemList.size
                     Observable.just(itemList)
             }
             .subscribeOn(Schedulers.io())
@@ -61,7 +64,7 @@ class ItemViewListModel(): BaseViewModel() {
                         result -> onRetrieveItemListSuccess(result as List<Item>)
                 },
                 {
-                    onRetrieveItemListError(it)
+                    onRetrieveItemListError()
                 }
             )
     }
@@ -84,7 +87,7 @@ class ItemViewListModel(): BaseViewModel() {
         itemListAdapter.updateItemList(itemList)
     }
 
-    private fun onRetrieveItemListError(throwable: Throwable){
+    private fun onRetrieveItemListError(){
         errorMessage.value = R.string.post_error
     }
 }

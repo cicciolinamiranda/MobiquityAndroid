@@ -1,42 +1,44 @@
-package com.example.mobiquity
+package com.example.mobiquity.ui
 
 import android.content.Context
+import android.view.View
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.databinding.adapters.Converters
 import androidx.room.Room
+import com.example.mobiquity.RxImmediateSchedulerRule
 import com.example.mobiquity.network.ItemApi
 import com.example.mobiquity.repository.dao.ItemDao
 import com.example.mobiquity.repository.database.AppDatabase
+import com.example.mobiquity.repository.dto.ProductDTO
 import com.example.mobiquity.repository.model.Item
 import com.example.mobiquity.repository.model.Product
 import com.example.mobiquity.repository.model.SalePrice
 import com.example.mobiquity.ui.item.ItemViewListModel
+import com.example.mobiquity.ui.product.ProductViewListModel
+import com.google.gson.Gson
 import io.reactivex.Observable
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TestRule
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
-import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnit
 
-
-class ItemViewListModelTest {
+class ProductViewListModelTest {
 
     @get:Rule
     var rule = InstantTaskExecutorRule()
 
-    @get:Rule @JvmField
+    @get:Rule
+    @JvmField
     val mockitoRule = MockitoJUnit.rule()!!
 
-    @get:Rule @JvmField
+    @get:Rule
+    @JvmField
     val testSchedulerRule = RxImmediateSchedulerRule()
-
-    @Mock
-    lateinit var itemApi: ItemApi
 
     @Mock
     lateinit var itemDao: ItemDao
@@ -44,38 +46,29 @@ class ItemViewListModelTest {
     @Mock
     lateinit var db: AppDatabase
 
-    private var testItems : Observable<List<Item>>? = null
-
     @InjectMocks
-    var itemViewListModel = ItemViewListModel()
+    var productViewListModel = ProductViewListModel()
 
     @Before
     fun setup(){
-        val context: Context = mock(Context::class.java)
+        val context: Context = Mockito.mock(Context::class.java)
         db = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
         itemDao = db.itemDao()
-        itemViewListModel = ItemViewListModel(itemDao)
         MockitoAnnotations.initMocks(this)
     }
 
     @Test
-    fun getItemsSuccess() {
+    fun getProductsSuccess() {
         val product = Product(1,1,"Product Name","/Bread.jpg", "Product Description", SalePrice(10.0, "EURO"))
         val products = arrayListOf(product)
         val item = Item(1, "Item Name", "Item Description", products)
-        val items = arrayListOf(item)
+        val gson = Gson()
+        val productDTO = ProductDTO(item.name, gson.toJson(products))
+        Mockito.`when`(itemDao.getProductsOnlyByItemId(item.id)).thenReturn(productDTO)
+        productViewListModel.loadItems(item.id)
 
-        testItems = Observable.just(items)
-        Mockito.`when`(itemDao.all).thenReturn(items)
-        Mockito.`when`(itemApi.getItems()).thenReturn(testItems)
-//        itemViewListModel = ItemViewListModel(itemDao)
-        itemViewListModel.loadItems()
+        Assert.assertNotEquals(null,productViewListModel.productListAdapter)
+        Assert.assertNotEquals(0,productViewListModel.productListAdapter.itemCount)
 
-        Assert.assertEquals(1, itemViewListModel.itemListAdapter.itemCount)
-
-        Assert.assertEquals(null,itemViewListModel.errorMessage.value)
-
-        Assert.assertEquals(false,itemViewListModel.loadingVisibility.value)
     }
 }
-

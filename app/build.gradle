@@ -28,9 +28,9 @@ android {
         enabled = true
     }
 
-    testOptions {
-        unitTests.returnDefaultValues = true
-    }
+//    testOptions {
+//        unitTests.returnDefaultValues = true
+//    }
 
     defaultConfig {
         applicationId "com.example.mobiquity"

@@ -42,7 +42,7 @@ class ProductViewListModel(): BaseViewModel() {
         }
             .concatMap {
                     itemProducts ->
-                    Observable.just(itemProducts)
+                Observable.just(itemProducts)
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
