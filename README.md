@@ -1,6 +1,6 @@
-#Mobiquity Android Assignment
+# Mobiquity Android Assignment
 
-# Using Kotlin ,MVVM, Dagger-2, RxJava, Retrofit
+## Using Kotlin ,MVVM, Dagger-2, RxJava, Retrofit
 
 ## Example’s Feature:
 * Load data from server Using Retrofit2.
