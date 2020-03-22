@@ -7,6 +7,7 @@
 * Use Livedata with Room.
 
 <img src="https://github.com/cicciolinamiranda/MobiquityAndroid/blob/master/static/mobiquity.gif" height="450px" width="250px">
+
 ***
 ## Technology Stack
 * Kotlin
