@@ -11,6 +11,9 @@ import com.example.mobiquity.repository.model.Product
 import com.example.mobiquity.repository.model.SalePrice
 import com.example.mobiquity.ui.item.ItemViewListModel
 import io.reactivex.Observable
+import io.reactivex.android.plugins.RxAndroidPlugins
+import io.reactivex.plugins.RxJavaPlugins
+import io.reactivex.schedulers.Schedulers
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -54,6 +57,10 @@ class ItemViewListModelTest {
         val context: Context = mock(Context::class.java)
         db = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
         itemDao = db.itemDao()
+        RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
+        RxJavaPlugins.setComputationSchedulerHandler { Schedulers.trampoline() }
+        RxJavaPlugins.setNewThreadSchedulerHandler { Schedulers.trampoline() }
+        RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
         MockitoAnnotations.initMocks(this)
     }
 

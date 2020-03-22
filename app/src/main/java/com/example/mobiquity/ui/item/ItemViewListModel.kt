@@ -30,8 +30,6 @@ class ItemViewListModel(): BaseViewModel() {
 
     val errorClickListener = View.OnClickListener { loadItems() }
 
-    val itemCount: MutableLiveData<Int> = MutableLiveData()
-
     private lateinit var subscription: Disposable
 
     override fun onCleared() {
@@ -46,10 +44,11 @@ class ItemViewListModel(): BaseViewModel() {
         }
             .concatMap {
                     itemList ->
-                itemCount.value = itemList.size
+
                 if(itemList.isEmpty())
                     itemApi.getItems().concatMap {
-                            apiItemResponse -> itemDao.insertAll(apiItemResponse)
+                            apiItemResponse ->
+                        itemDao.insertAll(apiItemResponse)
                         Observable.just(apiItemResponse)
                     }
                 else
