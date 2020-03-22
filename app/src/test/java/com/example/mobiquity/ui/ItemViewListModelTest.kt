@@ -35,9 +35,6 @@ class ItemViewListModelTest {
     @get:Rule @JvmField
     val mockitoRule = MockitoJUnit.rule()!!
 
-//    @get:Rule @JvmField
-//    val testSchedulerRule = RxImmediateSchedulerRule()
-
     @Mock
     lateinit var itemApi: ItemApi
 

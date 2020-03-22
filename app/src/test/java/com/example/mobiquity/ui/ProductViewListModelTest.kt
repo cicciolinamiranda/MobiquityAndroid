@@ -1,22 +1,16 @@
 package com.example.mobiquity.ui
 
 import android.content.Context
-import android.view.View
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.databinding.adapters.Converters
 import androidx.room.Room
-import com.example.mobiquity.RxImmediateSchedulerRule
-import com.example.mobiquity.network.ItemApi
 import com.example.mobiquity.repository.dao.ItemDao
 import com.example.mobiquity.repository.database.AppDatabase
 import com.example.mobiquity.repository.dto.ProductDTO
 import com.example.mobiquity.repository.model.Item
 import com.example.mobiquity.repository.model.Product
 import com.example.mobiquity.repository.model.SalePrice
-import com.example.mobiquity.ui.item.ItemViewListModel
 import com.example.mobiquity.ui.product.ProductViewListModel
 import com.google.gson.Gson
-import io.reactivex.Observable
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
