@@ -14,9 +14,15 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class ItemViewListModel(private val itemDao: ItemDao): BaseViewModel() {
+class ItemViewListModel(): BaseViewModel() {
+
+    constructor (itemDao: ItemDao) : this() {
+        this.itemDao = itemDao
+        loadItems()
+    }
     @Inject
     lateinit var itemApi: ItemApi
+    lateinit var itemDao: ItemDao
     val itemListAdapter: ItemListAdapter = ItemListAdapter()
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
@@ -26,17 +32,13 @@ class ItemViewListModel(private val itemDao: ItemDao): BaseViewModel() {
 
     private lateinit var subscription: Disposable
 
-    init{
-        loadItems()
-    }
-
     override fun onCleared() {
         super.onCleared()
         subscription.dispose()
     }
 
 
-    private fun loadItems(){
+    fun loadItems(){
         subscription = Observable.fromCallable {
             itemDao.all
         }

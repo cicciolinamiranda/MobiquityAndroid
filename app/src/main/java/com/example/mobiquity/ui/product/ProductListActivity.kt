@@ -20,7 +20,7 @@ class ProductListActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_product_list)
         binding.productList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         val itemId = intent.getLongExtra("itemId", 36802)
-        viewModel = ViewModelProviders.of(this, ViewListModelFactory(this)).get(ProductViewListModel::class.java)
+        viewModel = ViewModelProviders.of(this, ViewListModelFactory(this, false)).get(ProductViewListModel::class.java)
         viewModel.loadItems(itemId)
         binding.viewModel = viewModel
         //to change title of activity

@@ -17,7 +17,13 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class ProductViewListModel(private val itemDao: ItemDao): BaseViewModel() {
+class ProductViewListModel(): BaseViewModel() {
+
+    constructor (itemDao: ItemDao) : this() {
+        this.itemDao = itemDao
+    }
+
+    lateinit var itemDao: ItemDao
 
     val productListAdapter: ProductListAdapter = ProductListAdapter()
 

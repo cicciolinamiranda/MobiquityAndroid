@@ -7,5 +7,5 @@ import com.example.mobiquity.repository.model.Item
 
 @Database(entities = [Item::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun itemDao(): ItemDao
+        abstract fun itemDao(): ItemDao
 }

@@ -8,9 +8,11 @@ import com.example.mobiquity.repository.database.AppDatabase
 import com.example.mobiquity.ui.item.ItemViewListModel
 import com.example.mobiquity.ui.product.ProductViewListModel
 
-class ViewListModelFactory(private val activity: AppCompatActivity): ViewModelProvider.Factory{
+class ViewListModelFactory(private val activity: AppCompatActivity, private val testMode: Boolean): ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        val db = Room.databaseBuilder(activity.applicationContext, AppDatabase::class.java, "mobiquity.db").build()
+        val db =
+            if (testMode == false) Room.databaseBuilder(activity.applicationContext, AppDatabase::class.java, "mobiquity.db").build()
+            else Room.inMemoryDatabaseBuilder(activity.applicationContext, AppDatabase::class.java).build()
         if (modelClass.isAssignableFrom(ItemViewListModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return ItemViewListModel(db.itemDao()) as T
