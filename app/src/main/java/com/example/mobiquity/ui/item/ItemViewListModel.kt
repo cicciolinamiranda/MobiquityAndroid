@@ -57,7 +57,9 @@ class ItemViewListModel(): BaseViewModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { onRetrieveItemListStart() }
-            .doOnTerminate { onRetrieveItemListFinish() }
+            .doOnTerminate {
+                onRetrieveItemListFinish()
+            }
             .subscribe(
                 {
                         result -> onRetrieveItemListSuccess(result as List<Item>)
@@ -83,6 +85,7 @@ class ItemViewListModel(): BaseViewModel() {
 
 
     private fun onRetrieveItemListSuccess(itemList:List<Item>){
+        errorMessage.value = null
         itemListAdapter.updateItemList(itemList)
     }
 

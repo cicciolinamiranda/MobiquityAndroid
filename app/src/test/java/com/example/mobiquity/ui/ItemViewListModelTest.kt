@@ -1,6 +1,7 @@
 package com.example.mobiquity
 
 import android.content.Context
+import android.view.View
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import com.example.mobiquity.network.ItemApi
@@ -65,7 +66,7 @@ class ItemViewListModelTest {
     fun getItemsFromCacheSuccess() {
         val product = Product(1,1,"Product Name","/Bread.jpg", "Product Description", SalePrice(10.0, "EURO"))
         val products = arrayListOf(product)
-        val item = Item(1, "Item Name", "Item Description", products)
+        val item = Item(41, "Item Name", "Item Description", products)
         val items = arrayListOf(item)
 
         testItems = Observable.just(items)
@@ -73,14 +74,14 @@ class ItemViewListModelTest {
         itemViewListModel.loadItems()
 
         Assert.assertNotEquals(0,itemViewListModel.itemListAdapter.itemCount)
-
+        Assert.assertEquals(41,itemViewListModel.itemListAdapter.getItemId(0))
     }
 
     @Test
     fun getItemsFromApiSuccess() {
         val product = Product(1,1,"Product Name","/Bread.jpg", "Product Description", SalePrice(10.0, "EURO"))
         val products = arrayListOf(product)
-        val item = Item(1, "Item Name", "Item Description", products)
+        val item = Item(12, "Item Name", "Item Description", products)
         val items = arrayListOf(item)
 
         testItems = Observable.just(items)
@@ -91,15 +92,16 @@ class ItemViewListModelTest {
         itemViewListModel.loadItems()
 
         Assert.assertNotEquals(0,itemViewListModel.itemListAdapter.itemCount)
+        Assert.assertEquals(12,itemViewListModel.itemListAdapter.getItemId(0))
     }
 
     @Test
-    fun getItemsFromCacheFail() {
+    fun getItemsFromitemListCacheFail() {
+        Mockito.`when`(itemDao.all).thenReturn(ArrayList())
         Mockito.`when`(itemDao.all).thenReturn(ArrayList())
         itemViewListModel.loadItems()
 
         Assert.assertEquals(0,itemViewListModel.itemListAdapter.itemCount)
-
     }
 
     @Test
@@ -109,6 +111,7 @@ class ItemViewListModelTest {
         itemViewListModel.loadItems()
 
         Assert.assertEquals(0,itemViewListModel.itemListAdapter.itemCount)
+
     }
 }
 

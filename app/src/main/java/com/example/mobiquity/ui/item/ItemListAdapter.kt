@@ -27,6 +27,10 @@ class ItemListAdapter: RecyclerView.Adapter<ItemListAdapter.ViewHolder>() {
         return if(::itemList.isInitialized) itemList.size else 0
     }
 
+    override fun getItemId(position: Int): Long {
+        return if(::itemList.isInitialized) itemList.get(position).id else 0
+    }
+
     fun updateItemList(postList:List<Item>){
         this.itemList = postList
         notifyDataSetChanged()
